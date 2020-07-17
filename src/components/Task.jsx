@@ -1,0 +1,50 @@
+import React from 'react';
+import styled from 'styled-components';
+
+const TaskContainer = styled.div`
+    display: grid;
+    grid-template-columns: 30px 1fr 50px;
+    justify-items: start;
+    background: ${ ({color}) => color };
+    align-items: center;
+    padding: 0 1rem;
+    width: 100%;
+    max-width: 250px;
+    margin: 1rem auto;
+    border-radius: 5px;
+`
+const TaskButton = styled.button`
+    font-size: .8rem;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    padding: .3rem .5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    outline: none;
+    &:hover{
+        background-color: white;
+        color: #222;
+    }
+`
+
+const TaskText = styled.p`
+    font-size: .8rem;
+    color: white;
+    text-decoration: ${({done}) => done ? 'line-through' : 'none'};
+`
+const Task = ({title, color, done, handleCompleteTask, handleDeleteTask})=>(
+    <>
+        <TaskContainer color={color}>
+            <input 
+                type="checkbox" 
+                onChange={handleCompleteTask}
+                defaultChecked={done}
+            />
+            <TaskText done={done}>{title}</TaskText>
+            <TaskButton onClick={handleDeleteTask}>Delete</TaskButton>
+        </TaskContainer>
+    </>
+)
+
+export default Task;
